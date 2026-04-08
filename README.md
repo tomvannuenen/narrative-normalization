@@ -1,10 +1,10 @@
 # Narrative Normalization
 
-Replication materials for "Narrative Normalization: How Large Language Models Reshape Personal Stories" (Digital Scholarship in the Humanities, 2026).
+Replication materials for "Narrative Normalization: How Large Language Models Reshape Personal Stories"
 
 ## Overview
 
-This repository contains the code, computed linguistic markers, and statistical results to reproduce the analysis in our paper. We find that LLMs systematically alter 73-88% of linguistic markers when processing personal narratives, regardless of whether the instruction says "improve" or merely "rewrite."
+This repository contains the code, computed linguistic markers, and statistical results to reproduce the analysis in our paper.
 
 ## Repository Structure
 
@@ -81,22 +81,6 @@ python run_empathic_pipeline.py --stage compare --prompt generic
 # Repeat for voice_preserving and rewrite_only conditions
 ```
 
-## Key Findings
-
-| Condition | % Markers Altered | Mean Effect Size |
-|-----------|-------------------|------------------|
-| Generic ("improve") | 82% | d = 0.58 |
-| Rewrite-only ("rewrite") | 83% | d = 0.58 |
-| Voice-preserving | 69% | d = 0.44 |
-
-The neutral "rewrite" instruction produces virtually identical normalization to "improve," demonstrating that normalization is training-intrinsic rather than triggered by evaluative framing.
-
-## Models Tested
-
-- OpenAI GPT-5.4 (March 2026)
-- Anthropic Claude Sonnet 4.6 (March 2026)
-- Google Gemini 3.1 Pro (March 2026)
-
 ## Citation
 
 ```bibtex
@@ -117,5 +101,5 @@ Data: See EmpathicStories license for original corpus
 ## Contact
 
 Tom van Nuenen
-School of Information, UC Berkeley
+D-Lab, UC Berkeley
 tomvannuenen@berkeley.edu
