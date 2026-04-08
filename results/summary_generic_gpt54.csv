@@ -1,0 +1,10 @@
+dimension,n_markers,n_significant,mean_abs_cohens_d,markers_decreased,markers_increased
+lexical_diversity,3,3,1.0525,0,3
+readability,3,3,0.949,1,2
+textual_entropy,2,1,0.661,0,2
+stylometric,9,7,0.591,5,4
+discourse_cohesion,2,2,0.3562,0,2
+other,15,9,0.2497,6,8
+syntactic_complexity,6,6,0.2234,2,4
+semantic_distance,3,2,0.1589,2,1
+sentiment_affect,6,3,0.1254,0,6
