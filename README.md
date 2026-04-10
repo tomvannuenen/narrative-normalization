@@ -16,8 +16,9 @@ This repository contains the code, computed linguistic markers, and statistical 
 │       └── markers_*.parquet           # Computed markers for rewrites
 ├── results/
 │   ├── comparison_*.csv                # Per-marker statistical results
-│   ├── summary_*.csv                   # Dimension-level summaries
-│   └── fig_three_conditions.*          # Main comparison figure
+│   └── summary_*.csv                   # Dimension-level summaries
+├── figures/
+│   └── fig_narrative_normalization.*   # Main figure: Normalization effects
 ├── src/
 │   ├── config.py                       # Configuration and paths
 │   ├── markers.py                      # Linguistic marker computation
@@ -27,7 +28,8 @@ This repository contains the code, computed linguistic markers, and statistical 
 │   ├── rewriter.py                     # LLM API calls
 │   └── data_loader_empathic.py         # Data loading utilities
 ├── scripts/
-│   └── generate_three_condition_figure.py
+│   ├── generate_narrative_normalization_figure.py  # Main figure
+│   └── generate_tables.py                          # Paper tables
 ├── run_empathic_pipeline.py            # Main analysis pipeline
 └── requirements.txt
 ```
@@ -57,11 +59,17 @@ python -m spacy download en_core_web_sm
 
 ### Using Pre-computed Results
 
-The statistical results are already computed and available in `results/`. To regenerate figures:
+The statistical results are already computed and available in `results/`. To regenerate figure and tables:
 
 ```bash
-python scripts/generate_three_condition_figure.py
+# Generate main figure
+python scripts/generate_narrative_normalization_figure.py
+
+# Generate all paper tables
+python scripts/generate_tables.py
 ```
+
+Figure is saved to `figures/`. Table output is printed to console.
 
 ### Full Reproduction (requires API keys)
 
