@@ -1,6 +1,6 @@
-# Narrative Normalization
+# Voice Under Revision
 
-Replication materials for "Narrative Normalization: How Large Language Models Reshape Personal Stories"
+Replication materials for "Voice Under Revision: Large Language Models and the Normalization of Personal Narrative"
 
 ## Overview
 
@@ -37,16 +37,16 @@ This repository contains the code, computed linguistic markers, and statistical 
 ## Data Availability
 
 **Included in this repository:**
-- Original 300 sampled stories from EmpathicStories corpus
-- All computed linguistic markers (49 markers × 300 stories × 3 models × 3 conditions)
+- Original 300 sampled stories from EmpathicStories corpus (`sample.parquet`)
+- LLM-generated rewrites for all 3 models × 3 conditions (`rewrites_*.parquet`)
+- All computed linguistic markers (48 markers × 300 stories × 3 models × 3 conditions)
 - Statistical comparison results (effect sizes, p-values)
-
-**Not included (API Terms of Service):**
-- LLM-generated rewrites cannot be redistributed
-- Rewrites can be regenerated using the provided code with API access
 
 **Source data:**
 - EmpathicStories corpus: [Shen et al. (2023)](https://github.com/behavioral-data/EmpathicStories)
+
+**Regenerating rewrites (optional):**
+To regenerate rewrites from scratch (~$25-30 in API fees), see "Full Reproduction" below.
 
 ## Reproducing the Analysis
 
@@ -92,8 +92,8 @@ python run_empathic_pipeline.py --stage compare --prompt generic
 ## Citation
 
 ```bibtex
-@article{vannuenen2026narrative,
-  title={Narrative Normalization: How Large Language Models Reshape Personal Stories},
+@article{vannuenen2026voice,
+  title={Voice Under Revision: Large Language Models and the Normalization of Personal Narrative},
   author={van Nuenen, Tom},
   journal={Digital Scholarship in the Humanities},
   year={2026},

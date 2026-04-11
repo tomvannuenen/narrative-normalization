@@ -24,17 +24,18 @@ MODEL_LABELS = {
     'gemini_31_pro': 'Gemini 3.1 Pro',
 }
 
-# Dimension groupings matching actual markers in the data
-# Note: Paper Table 3 shows a subset of dimensions; full results in supplementary
+# All 10 dimensions ordered by theoretical relevance for DH
 DIMENSION_MARKERS = {
+    'Voice Markers': ['voice_contraction_density', 'voice_first_person_density', 'voice_disfluency', 'voice_proper_noun_density', 'voice_specific_number_density'],
     'Lexical Diversity': ['ld_unique_words', 'ld_mtld', 'ld_hapax_ratio'],
+    'Stylometric': ['pos_adj_ratio', 'pos_adv_ratio', 'pos_noun_ratio', 'pos_pron_ratio', 'pos_punct_ratio', 'sty_exclamation_per_sent', 'sty_function_word_ratio', 'sty_question_per_sent'],
     'Readability': ['read_flesch_ease', 'read_coleman_liau', 'read_syllables_per_word', 'sty_mean_word_length'],
-    'Voice/Authenticity': ['voice_contraction_density', 'voice_first_person_density', 'voice_disfluency', 'voice_proper_noun_density'],
-    'Emotional Dynamics': ['emo_granularity', 'emo_volatility', 'emo_word_density'],
     'Syntactic Complexity': ['syn_mean_sent_len', 'syn_std_sent_len', 'syn_n_sents', 'syn_subordination_ratio', 'syn_mean_depth', 'syn_min_sent_len'],
-    'Coherence': ['coh_local_similarity', 'coh_global_similarity'],
+    'Semantic Coherence': ['coh_local_similarity', 'coh_global_similarity', 'sd_max_consecutive', 'sd_spread', 'sd_std_consecutive'],
+    'Emotional Dynamics': ['emo_granularity', 'emo_volatility', 'emo_word_density'],
     'Sentiment': ['sent_mean_compound', 'sent_std_compound', 'sent_pct_positive', 'sent_pct_negative', 'sent_min_compound', 'sent_max_compound'],
-    'Narrative Structure': ['narr_past_tense_ratio', 'narr_action_verb_density'],
+    'Narrative Structure': ['narr_past_tense_ratio', 'narr_action_verb_density', 'narr_temporal_marker_density', 'causal_markers', 'moral_loyalty', 'conflict_second_person'],
+    'Textual Entropy': ['ent_char', 'ent_word'],
 }
 
 

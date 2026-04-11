@@ -47,7 +47,7 @@ MODEL_LABELS = {
 # Voice/authenticity first (core argument), then established DH markers,
 # then exploratory dimensions (surface → deep → information-theoretic)
 DIMENSION_MARKERS = {
-    'Voice/Authenticity': ['voice_contraction_density', 'voice_first_person_density', 'voice_disfluency', 'voice_proper_noun_density', 'voice_specific_number_density'],
+    'Voice Markers': ['voice_contraction_density', 'voice_first_person_density', 'voice_disfluency', 'voice_proper_noun_density', 'voice_specific_number_density'],
     'Lexical Diversity': ['ld_unique_words', 'ld_mtld', 'ld_hapax_ratio'],
     'Stylometric': ['pos_adj_ratio', 'pos_adv_ratio', 'pos_noun_ratio', 'pos_pron_ratio', 'pos_punct_ratio', 'sty_exclamation_per_sent', 'sty_function_word_ratio', 'sty_question_per_sent'],
     'Readability': ['read_flesch_ease', 'read_coleman_liau', 'read_syllables_per_word', 'sty_mean_word_length'],
@@ -90,12 +90,18 @@ def plot_narrative_normalization():
     """Create the three-panel figure."""
     fig = plt.figure(figsize=(16, 5), dpi=150)
 
-    # Create grid: three panels side by side (increased wspace to prevent label overlap)
-    gs = fig.add_gridspec(1, 3, width_ratios=[0.8, 1.4, 1], wspace=0.7)
+    # Create grid: three panels side by side
+    gs = fig.add_gridspec(1, 3, width_ratios=[0.85, 1.25, 1.2], wspace=0.55)
 
     ax1 = fig.add_subplot(gs[0])  # Panel A: Heatmap
     ax2 = fig.add_subplot(gs[1])  # Panel B: Horizontal bars
     ax3 = fig.add_subplot(gs[2])  # Panel C: Contraction density
+
+    # Shift panels to balance spacing (B right, C left)
+    pos2 = ax2.get_position()
+    ax2.set_position([pos2.x0 + 0.015, pos2.y0, pos2.width, pos2.height])
+    pos3 = ax3.get_position()
+    ax3.set_position([pos3.x0 - 0.03, pos3.y0, pos3.width, pos3.height])
 
     models = ['gpt54', 'claude_sonnet', 'gemini_31_pro']
     dimensions = list(DIMENSION_MARKERS.keys())
@@ -177,11 +183,12 @@ def plot_narrative_normalization():
     ax2.set_yticks(y_pos)
     ax2.set_yticklabels(dimensions)
     ax2.invert_yaxis()
+    ax2.set_xlim(0, 2.0)  # Extra space for legend
     ax2.set_xlabel("Mean |Cohen's d|", fontweight='bold')
     ax2.set_title('(B) Mitigation by Dimension', fontweight='bold', loc='left')
     ax2.spines['top'].set_visible(False)
     ax2.spines['right'].set_visible(False)
-    ax2.legend(loc='lower right', framealpha=0.9, fontsize=8)
+    ax2.legend(loc='upper right', bbox_to_anchor=(1.0, 1.0), framealpha=0.95, fontsize=8)
 
     # ── Panel C: Key Markers Under Generic Prompt ──
     # Selected based on: largest effect sizes + theoretical importance for voice/style

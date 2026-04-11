@@ -244,7 +244,9 @@ def authenticity_voice(text: str) -> dict:
     disfluency_density = disfluency_count / len(text.split())
 
     # Contractions (informal language)
-    contraction_pattern = r"n't|'re|'ve|'ll|'d|'m|'s"
+    # Handle both straight (') and curly (') apostrophes - LLMs often output curly
+    # U+0027 = straight apostrophe, U+2019 = right single quotation mark (curly)
+    contraction_pattern = r"n['\u2019]t|['\u2019]re|['\u2019]ve|['\u2019]ll|['\u2019]d|['\u2019]m|['\u2019]s"
     contractions = len(re.findall(contraction_pattern, text))
     contraction_density = contractions / n_tokens
 

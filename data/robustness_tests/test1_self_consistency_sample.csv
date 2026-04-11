@@ -1,0 +1,51 @@
+story_id,test,n_runs_required,data_source,length_quartile
+331,self_consistency,3,Hippocorpus,Q2
+50,self_consistency,3,Hippocorpus,Q2
+981,self_consistency,3,Hippocorpus,Q4
+150,self_consistency,3,Hippocorpus,Q1
+974,self_consistency,3,Hippocorpus,Q3
+939,self_consistency,3,Hippocorpus,Q4
+971,self_consistency,3,Hippocorpus,Q4
+300,self_consistency,3,Hippocorpus,Q4
+256,self_consistency,3,Hippocorpus,Q3
+977,self_consistency,3,Hippocorpus,Q3
+339,self_consistency,3,Hippocorpus,Q4
+91,self_consistency,3,Hippocorpus,Q3
+943,self_consistency,3,Hippocorpus,Q4
+41,self_consistency,3,Hippocorpus,Q4
+98,self_consistency,3,Hippocorpus,Q1
+323,self_consistency,3,Hippocorpus,Q4
+95,self_consistency,3,Hippocorpus,Q1
+962,self_consistency,3,Hippocorpus,Q3
+96,self_consistency,3,Hippocorpus,Q2
+120,self_consistency,3,Hippocorpus,Q3
+92,self_consistency,3,Hippocorpus,Q4
+750,self_consistency,3,Road Trip Narratives,Q1
+792,self_consistency,3,Road Trip Narratives,Q1
+1054,self_consistency,3,Road Trip Narratives,Q3
+1093,self_consistency,3,Road Trip Narratives,Q2
+1057,self_consistency,3,Road Trip Narratives,Q2
+1091,self_consistency,3,Road Trip Narratives,Q2
+615,self_consistency,3,Road Trip Narratives,Q3
+692,self_consistency,3,Road Trip Narratives,Q2
+670,self_consistency,3,Road Trip Narratives,Q1
+655,self_consistency,3,Road Trip Narratives,Q1
+884,self_consistency,3,Road Trip Narratives,Q1
+652,self_consistency,3,Road Trip Narratives,Q2
+790,self_consistency,3,Road Trip Narratives,Q1
+1088,self_consistency,3,Road Trip Narratives,Q3
+515,self_consistency,3,Reddit-Off My Chest,Q2
+519,self_consistency,3,Reddit-Off My Chest,Q1
+454,self_consistency,3,Reddit-Off My Chest,Q4
+877,self_consistency,3,Reddit-Off My Chest,Q4
+1026,self_consistency,3,Reddit-Off My Chest,Q2
+446,self_consistency,3,Reddit-Off My Chest,Q3
+379,self_consistency,3,Reddit-Casual Conversations,Q2
+391,self_consistency,3,Reddit-Casual Conversations,Q1
+431,self_consistency,3,Reddit-Casual Conversations,Q4
+408,self_consistency,3,Reddit-Casual Conversations,Q2
+549,self_consistency,3,Reddit-Today I Am Happy,Q1
+557,self_consistency,3,Reddit-Today I Am Happy,Q2
+579,self_consistency,3,Reddit-Today I Am Happy,Q3
+569,self_consistency,3,Reddit-Today I Am Happy,Q4
+8,self_consistency,3,Facebook-MIT Confession,Q3
