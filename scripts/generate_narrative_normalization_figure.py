@@ -13,9 +13,10 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 from pathlib import Path
 
-# Setup paths (relative to repo root, run from repo root directory)
-RESULTS_DIR = Path("results")
-FIGURES_DIR = Path("figures")
+# Setup paths
+RESULTS_DIR = Path(__file__).parent.parent / "results"
+FIGURES_DIR = Path(__file__).parent.parent / "figures"
+PAPER_DIR = Path(__file__).parent.parent / "Narrative_Normalization" / "paper" / "dsh"
 
 # Publication settings (matching generate_three_condition_figure.py)
 plt.rcParams.update({
@@ -238,12 +239,13 @@ def main():
 
     # Create directories
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    PAPER_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Save to figures directory
-    fig.savefig(FIGURES_DIR / "fig_narrative_normalization.pdf", bbox_inches='tight', dpi=300)
-    fig.savefig(FIGURES_DIR / "fig_narrative_normalization.png", bbox_inches='tight', dpi=300)
-    print(f"Saved: {FIGURES_DIR / 'fig_narrative_normalization.pdf'}")
+    # Save to multiple locations
+    for output_dir in [FIGURES_DIR, PAPER_DIR]:
+        fig.savefig(output_dir / "fig_narrative_normalization.pdf", bbox_inches='tight', dpi=300)
+        fig.savefig(output_dir / "fig_narrative_normalization.png", bbox_inches='tight', dpi=300)
+        print(f"Saved: {output_dir / 'fig_narrative_normalization.pdf'}")
 
     plt.close(fig)
     print("\nDone!")

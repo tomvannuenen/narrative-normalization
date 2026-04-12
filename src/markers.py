@@ -497,13 +497,20 @@ ALL_DIMENSIONS = [
 ]
 
 
-def compute_all_markers(text: str, include_empathic: bool = False) -> dict:
+def compute_all_markers(
+    text: str,
+    include_empathic: bool = False,
+    include_stylometric: bool = False,
+) -> dict:
     """Run all dimension functions and merge into one flat dict.
 
     Args:
         text: Input text to analyze
         include_empathic: If True, also compute empathic narrative markers
                          (emotional dynamics, moral language, authenticity, etc.)
+        include_stylometric: If True, also compute core stylometric markers
+                            (character n-grams, vocabulary richness, Delta features, etc.)
+                            Following Stamatatos (2009) and Eder et al. (2016).
 
     Returns:
         Dictionary of all computed markers
@@ -522,5 +529,13 @@ def compute_all_markers(text: str, include_empathic: bool = False) -> dict:
             result.update(compute_empathic_markers(text))
         except Exception as e:
             print(f"  Warning: empathic_markers failed: {e}")
+
+    # Optionally include core stylometric markers
+    if include_stylometric:
+        try:
+            from src.stylometric_markers import compute_stylometric_markers
+            result.update(compute_stylometric_markers(text))
+        except Exception as e:
+            print(f"  Warning: stylometric_markers failed: {e}")
 
     return result

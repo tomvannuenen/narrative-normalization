@@ -3,7 +3,7 @@ lexical_diversity,3,3,1.8912,0,3
 readability,3,3,1.6214,1,2
 textual_entropy,2,2,1.407,0,2
 stylometric,9,8,0.7774,4,5
-other,15,11,0.3271,7,7
+other,15,11,0.3244,7,7
 semantic_distance,3,2,0.2777,3,0
 discourse_cohesion,2,2,0.2576,2,0
 syntactic_complexity,6,5,0.2245,0,6

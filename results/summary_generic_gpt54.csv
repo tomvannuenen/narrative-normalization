@@ -5,6 +5,6 @@ textual_entropy,2,1,0.661,0,2
 stylometric,9,7,0.591,5,4
 discourse_cohesion,2,2,0.3562,0,2
 syntactic_complexity,6,6,0.2234,2,4
-other,15,9,0.1725,6,8
+other,15,9,0.1701,6,8
 semantic_distance,3,2,0.1589,2,1
 sentiment_affect,6,3,0.1254,0,6

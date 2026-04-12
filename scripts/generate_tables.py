@@ -18,6 +18,21 @@ RESULTS_DIR = Path("results")
 MODELS = ['gpt54', 'claude_sonnet', 'gemini_31_pro']
 CONDITIONS = ['generic', 'rewrite_only', 'voice_preserving']
 
+# Expected marker counts for validation (paper reports 48 retained markers)
+EXPECTED_TOTAL_MARKERS = 48
+EXPECTED_DIMENSION_COUNTS = {
+    'Voice Markers': 5,
+    'Lexical Diversity': 3,
+    'Stylometric': 8,
+    'Readability': 4,
+    'Syntactic Complexity': 6,
+    'Semantic Coherence': 5,
+    'Emotional Dynamics': 3,
+    'Sentiment': 6,
+    'Narrative Structure': 6,
+    'Textual Entropy': 2,
+}
+
 MODEL_LABELS = {
     'gpt54': 'GPT-5.4',
     'claude_sonnet': 'Claude Sonnet 4.6',
@@ -39,6 +54,22 @@ DIMENSION_MARKERS = {
 }
 
 
+def to_rewrite_direction(cohens_d: float) -> float:
+    """Convert Cohen's d to rewrite-relative direction.
+
+    Sign convention in our data:
+    - Positive d = original > rewrite (rewrite DECREASES the feature)
+    - Negative d = original < rewrite (rewrite INCREASES the feature)
+
+    For interpretability in figures/tables, we often want:
+    - Positive = rewrite increases (inflation)
+    - Negative = rewrite decreases (deflation)
+
+    This helper flips the sign to get rewrite-relative direction.
+    """
+    return -cohens_d
+
+
 def load_comparison(condition: str, model: str) -> pd.DataFrame:
     """Load a comparison CSV."""
     path = RESULTS_DIR / f"comparison_{condition}_{model}.csv"
@@ -48,6 +79,40 @@ def load_comparison(condition: str, model: str) -> pd.DataFrame:
         df = df[df['marker'] != 'id']
         return df
     return None
+
+
+def validate_marker_counts():
+    """Validate that comparison files have expected marker counts.
+
+    The paper reports 48 retained markers with specific dimension counts.
+    This check ensures data integrity and guards against drift.
+    """
+    print("\nValidating marker counts...")
+    errors = []
+
+    # Check total markers
+    df = load_comparison('generic', MODELS[0])
+    if df is not None:
+        actual_total = len(df)
+        if actual_total != EXPECTED_TOTAL_MARKERS:
+            errors.append(f"Total markers: expected {EXPECTED_TOTAL_MARKERS}, got {actual_total}")
+
+        # Check dimension counts
+        for dim, expected_count in EXPECTED_DIMENSION_COUNTS.items():
+            markers = DIMENSION_MARKERS.get(dim, [])
+            actual_count = len(df[df['marker'].isin(markers)])
+            if actual_count != expected_count:
+                errors.append(f"{dim}: expected {expected_count}, got {actual_count}")
+
+    if errors:
+        print("⚠ VALIDATION WARNINGS:")
+        for err in errors:
+            print(f"  - {err}")
+        print("  (Marker set may have changed; verify paper claims match data)")
+    else:
+        print("✓ All marker counts match expected values (48 total)")
+
+    return len(errors) == 0
 
 
 def generate_table1():
@@ -77,6 +142,10 @@ def generate_table2():
     """Table 2: Comparison across prompt conditions.
 
     Shows: Condition, Mean Sig. %, Mean |d|, Direction Agreement
+
+    Direction agreement is computed as within-model comparison:
+    For each model, we compare each marker's direction under rewrite_only/voice_preserving
+    to that same model's direction under generic, then average across models.
     """
     print("\n" + "="*60)
     print("TABLE 2: Comparison across prompt conditions")
@@ -84,16 +153,13 @@ def generate_table2():
     print(f"{'Condition':<30} {'Mean Sig. %':<15} {'Mean |d|':<12} {'Direction Agreement':<20}")
     print("-"*75)
 
-    # Get generic condition data for direction comparison
-    generic_directions = {}
+    # Load generic condition data for each model (for within-model direction comparison)
+    generic_data = {}
     for model in MODELS:
         df = load_comparison('generic', model)
         if df is not None:
-            for _, row in df.iterrows():
-                marker = row['marker']
-                if marker not in generic_directions:
-                    generic_directions[marker] = []
-                generic_directions[marker].append(row['cohens_d'] > 0)  # True = decrease
+            # Store direction for each marker: positive d means original > rewrite
+            generic_data[model] = {row['marker']: row['cohens_d'] > 0 for _, row in df.iterrows()}
 
     for cond in CONDITIONS:
         sig_pcts = []
@@ -106,17 +172,16 @@ def generate_table2():
                 sig_pcts.append(100 * df['significant_fdr'].sum() / len(df))
                 mean_ds.append(df['cohens_d'].abs().mean())
 
-                # Calculate direction agreement with generic
-                if cond != 'generic':
+                # Calculate direction agreement with THIS model's generic condition
+                if cond != 'generic' and model in generic_data:
                     agreements = 0
                     total = 0
                     for _, row in df.iterrows():
                         marker = row['marker']
-                        if marker in generic_directions:
+                        if marker in generic_data[model]:
                             current_dir = row['cohens_d'] > 0
-                            # Check if majority of generic models agree
-                            generic_majority = sum(generic_directions[marker]) > len(generic_directions[marker]) / 2
-                            if current_dir == generic_majority:
+                            generic_dir = generic_data[model][marker]
+                            if current_dir == generic_dir:
                                 agreements += 1
                             total += 1
                     if total > 0:
@@ -166,9 +231,8 @@ def generate_table3():
                 n_total = len(dim_data)
                 n_sig = dim_data['significant_fdr'].sum()
 
-                # Mean d with direction indicator
-                # Flip sign so positive = rewrite increases (inflation)
-                mean_d = -dim_data['cohens_d'].mean()
+                # Mean d with direction indicator (using helper for sign convention)
+                mean_d = to_rewrite_direction(dim_data['cohens_d'].mean())
 
                 if abs(mean_d) > 0.1:
                     arrow = "↑" if mean_d > 0 else "↓"
@@ -263,6 +327,9 @@ def generate_key_markers():
 def main():
     print("Generating tables from paper results...")
     print("Data directory:", RESULTS_DIR.absolute())
+
+    # Validate marker counts before generating tables
+    validate_marker_counts()
 
     generate_table1()
     generate_table2()

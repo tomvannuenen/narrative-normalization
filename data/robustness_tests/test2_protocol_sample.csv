@@ -1,0 +1,101 @@
+story_id,test,in_consistency_sample,data_source,length_quartile
+41,protocol_robustness,True,Hippocorpus,Q4
+967,protocol_robustness,False,Hippocorpus,Q3
+904,protocol_robustness,False,Hippocorpus,Q3
+287,protocol_robustness,False,Hippocorpus,Q4
+52,protocol_robustness,False,Hippocorpus,Q3
+268,protocol_robustness,False,Hippocorpus,Q4
+194,protocol_robustness,False,Hippocorpus,Q1
+89,protocol_robustness,False,Hippocorpus,Q4
+267,protocol_robustness,False,Hippocorpus,Q4
+151,protocol_robustness,False,Hippocorpus,Q2
+96,protocol_robustness,True,Hippocorpus,Q2
+50,protocol_robustness,True,Hippocorpus,Q2
+256,protocol_robustness,True,Hippocorpus,Q3
+150,protocol_robustness,True,Hippocorpus,Q1
+237,protocol_robustness,False,Hippocorpus,Q2
+257,protocol_robustness,False,Hippocorpus,Q2
+917,protocol_robustness,False,Hippocorpus,Q3
+123,protocol_robustness,False,Hippocorpus,Q4
+82,protocol_robustness,False,Hippocorpus,Q1
+353,protocol_robustness,False,Hippocorpus,Q4
+36,protocol_robustness,False,Hippocorpus,Q4
+30,protocol_robustness,False,Hippocorpus,Q4
+329,protocol_robustness,False,Hippocorpus,Q2
+215,protocol_robustness,False,Hippocorpus,Q4
+19,protocol_robustness,False,Hippocorpus,Q3
+294,protocol_robustness,False,Hippocorpus,Q3
+97,protocol_robustness,False,Hippocorpus,Q2
+92,protocol_robustness,True,Hippocorpus,Q4
+368,protocol_robustness,False,Hippocorpus,Q2
+339,protocol_robustness,True,Hippocorpus,Q4
+143,protocol_robustness,False,Hippocorpus,Q4
+76,protocol_robustness,False,Hippocorpus,Q4
+250,protocol_robustness,False,Hippocorpus,Q4
+74,protocol_robustness,False,Hippocorpus,Q3
+946,protocol_robustness,False,Hippocorpus,Q4
+101,protocol_robustness,False,Hippocorpus,Q4
+247,protocol_robustness,False,Hippocorpus,Q4
+109,protocol_robustness,False,Hippocorpus,Q3
+305,protocol_robustness,False,Hippocorpus,Q4
+156,protocol_robustness,False,Hippocorpus,Q1
+85,protocol_robustness,False,Hippocorpus,Q4
+212,protocol_robustness,False,Hippocorpus,Q4
+1054,protocol_robustness,True,Road Trip Narratives,Q3
+803,protocol_robustness,False,Road Trip Narratives,Q1
+721,protocol_robustness,False,Road Trip Narratives,Q2
+775,protocol_robustness,False,Road Trip Narratives,Q2
+1046,protocol_robustness,False,Road Trip Narratives,Q1
+1053,protocol_robustness,False,Road Trip Narratives,Q2
+787,protocol_robustness,False,Road Trip Narratives,Q1
+619,protocol_robustness,False,Road Trip Narratives,Q2
+724,protocol_robustness,False,Road Trip Narratives,Q1
+1066,protocol_robustness,False,Road Trip Narratives,Q2
+764,protocol_robustness,False,Road Trip Narratives,Q1
+711,protocol_robustness,False,Road Trip Narratives,Q2
+726,protocol_robustness,False,Road Trip Narratives,Q1
+1090,protocol_robustness,False,Road Trip Narratives,Q2
+656,protocol_robustness,False,Road Trip Narratives,Q1
+792,protocol_robustness,True,Road Trip Narratives,Q1
+1060,protocol_robustness,False,Road Trip Narratives,Q1
+632,protocol_robustness,False,Road Trip Narratives,Q2
+777,protocol_robustness,False,Road Trip Narratives,Q4
+667,protocol_robustness,False,Road Trip Narratives,Q2
+728,protocol_robustness,False,Road Trip Narratives,Q1
+700,protocol_robustness,False,Road Trip Narratives,Q3
+742,protocol_robustness,False,Road Trip Narratives,Q1
+652,protocol_robustness,True,Road Trip Narratives,Q2
+1077,protocol_robustness,False,Road Trip Narratives,Q2
+790,protocol_robustness,True,Road Trip Narratives,Q1
+753,protocol_robustness,False,Road Trip Narratives,Q2
+859,protocol_robustness,False,Road Trip Narratives,Q3
+489,protocol_robustness,False,Reddit-Off My Chest,Q4
+537,protocol_robustness,False,Reddit-Off My Chest,Q1
+1026,protocol_robustness,True,Reddit-Off My Chest,Q2
+468,protocol_robustness,False,Reddit-Off My Chest,Q3
+498,protocol_robustness,False,Reddit-Off My Chest,Q2
+1027,protocol_robustness,False,Reddit-Off My Chest,Q4
+446,protocol_robustness,True,Reddit-Off My Chest,Q3
+469,protocol_robustness,False,Reddit-Off My Chest,Q2
+486,protocol_robustness,False,Reddit-Off My Chest,Q4
+442,protocol_robustness,False,Reddit-Off My Chest,Q4
+509,protocol_robustness,False,Reddit-Off My Chest,Q1
+379,protocol_robustness,True,Reddit-Casual Conversations,Q2
+411,protocol_robustness,False,Reddit-Casual Conversations,Q4
+400,protocol_robustness,False,Reddit-Casual Conversations,Q3
+437,protocol_robustness,False,Reddit-Casual Conversations,Q1
+433,protocol_robustness,False,Reddit-Casual Conversations,Q1
+402,protocol_robustness,False,Reddit-Casual Conversations,Q4
+992,protocol_robustness,False,Reddit-Casual Conversations,Q2
+373,protocol_robustness,False,Reddit-Casual Conversations,Q1
+416,protocol_robustness,False,Reddit-Casual Conversations,Q1
+578,protocol_robustness,False,Reddit-Today I Am Happy,Q4
+1037,protocol_robustness,False,Reddit-Today I Am Happy,Q4
+565,protocol_robustness,False,Reddit-Today I Am Happy,Q4
+601,protocol_robustness,False,Reddit-Today I Am Happy,Q1
+572,protocol_robustness,False,Reddit-Today I Am Happy,Q3
+543,protocol_robustness,False,Reddit-Today I Am Happy,Q2
+549,protocol_robustness,True,Reddit-Today I Am Happy,Q1
+1043,protocol_robustness,False,Reddit-Today I Am Happy,Q3
+9,protocol_robustness,False,Facebook-MIT Confession,Q1
+0,protocol_robustness,False,Facebook-MIT Confession,Q3
