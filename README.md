@@ -38,10 +38,11 @@ This repository contains the code, computed linguistic markers, and statistical 
 │   ├── rewriter.py                           # LLM API calls
 │   └── data_loader_empathic.py               # Data loading utilities
 ├── scripts/
+│   ├── generate_refined_markers.py                 # Core 13-marker analysis
 │   ├── generate_narrative_normalization_figure.py  # Main figure
 │   ├── generate_radar_plot.py                      # Radar visualization
 │   ├── generate_stylometric_figure.py              # PCA/Delta figure
-│   ├── generate_tables.py                          # Paper tables
+│   ├── generate_tables.py                          # Paper tables (48 markers)
 │   ├── compute_stylometric_markers.py              # Compute Delta features
 │   ├── analyze_stylometric_convergence.py          # Delta attribution analysis
 │   ├── analyze_self_consistency.py                 # Robustness: consistency
@@ -91,6 +92,17 @@ To regenerate rewrites from scratch (~$25-30 in API fees), see "Full Reproductio
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
+
+### Core 13-Marker Analysis
+
+The paper's central analysis uses 13 markers. To regenerate the effect sizes from the marker parquet files:
+
+```bash
+# Generate refined_marker_effects.csv (13 markers × 3 models × 3 conditions)
+python scripts/generate_refined_markers.py
+```
+
+This computes Cohen's d, p-values, and percent change for each marker, combining stylometric features (function words, vocabulary diversity, punctuation) with voice/register markers (contractions, first-person pronouns, emotion words).
 
 ### Using Pre-computed Results
 

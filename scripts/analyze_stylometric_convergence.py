@@ -106,12 +106,16 @@ STYLOMETRIC_FEATURES = (
     WLEN_FEATURES + SLEN_FEATURES + PUNCT_FEATURES
 )
 
-# Core features most sensitive to authorship (for PCA)
+# Core features for stylometric analysis
+# Character n-grams are used instead of word-based MFW features because they are
+# methodologically appropriate for short texts (Eder 2017, Stamatatos 2013)
 CORE_STYLOMETRIC_FEATURES = [
-    'mfw_top10_coverage', 'mfw_top50_coverage', 'mfw_fw_ratio',
-    'vocab_yules_k', 'vocab_honores_r',
-    'char_3gram_entropy',
+    # Character n-grams (robust for short texts)
+    'char_2gram_entropy', 'char_3gram_entropy', 'char_4gram_entropy',
+    'char_2gram_hapax_ratio', 'char_3gram_hapax_ratio', 'char_4gram_hapax_ratio',
+    # Vocabulary (length-normalized)
     'wlen_mean', 'wlen_std',
+    # Syntax & punctuation
     'slen_mean', 'slen_std',
     'punct_comma_ratio', 'punct_dash_ratio',
 ]
@@ -340,12 +344,15 @@ def create_pca_visualization(originals: pd.DataFrame, rewrites: pd.DataFrame,
 
 def compute_cross_distances(originals: pd.DataFrame, rewrites: pd.DataFrame,
                            feature_cols: list[str]):
-    """Compute distances between originals and their rewrites.
+    """Test stylometric fingerprint retention via source-rewrite matching.
 
-    This tests whether we can still match originals to their rewrites.
+    For each rewrite, find its closest original by Delta distance and check
+    whether that match is the actual source text. This measures whether
+    rewriting preserves sufficient stylometric signal for a text to remain
+    identifiable---distinct from traditional multi-author attribution.
     """
     print(f"\n{'='*60}")
-    print(f"ATTRIBUTION ANALYSIS")
+    print(f"STYLOMETRIC FINGERPRINT RETENTION (Source-Rewrite Matching)")
     print(f"{'='*60}")
 
     # Filter to valid features
@@ -395,7 +402,7 @@ def compute_cross_distances(originals: pd.DataFrame, rewrites: pd.DataFrame,
 
         accuracy = correct / len(common)
         print(f"\n{model}:")
-        print(f"  Attribution accuracy: {accuracy*100:.1f}%")
+        print(f"  Source-rewrite matching accuracy: {accuracy*100:.1f}%")
         print(f"  (Chance = {100/len(common):.1f}%)")
 
 

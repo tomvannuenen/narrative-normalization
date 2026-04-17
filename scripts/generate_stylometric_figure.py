@@ -3,7 +3,7 @@
 
 Panel A: PCA projection showing originals scattered, rewrites clustered
 Panel B: Distribution shift along PC1
-Panel C: Attribution accuracy showing dramatic drop
+Panel C: Source-rewrite matching accuracy showing dramatic drop
 """
 
 import sys
@@ -53,11 +53,15 @@ MODEL_LABELS = {
 }
 
 # Core features for analysis
+# Character n-grams are used instead of word-based MFW features because they are
+# methodologically appropriate for short texts (Eder 2017, Stamatatos 2013)
 CORE_FEATURES = [
-    'mfw_top10_coverage', 'mfw_top50_coverage', 'mfw_fw_ratio',
-    'vocab_yules_k', 'vocab_honores_r',
-    'char_3gram_entropy',
+    # Character n-grams (robust for short texts)
+    'char_2gram_entropy', 'char_3gram_entropy', 'char_4gram_entropy',
+    'char_2gram_hapax_ratio', 'char_3gram_hapax_ratio', 'char_4gram_hapax_ratio',
+    # Vocabulary (length-normalized)
     'wlen_mean', 'wlen_std',
+    # Syntax & punctuation
     'slen_mean', 'slen_std',
     'punct_comma_ratio', 'punct_dash_ratio',
 ]
@@ -82,8 +86,12 @@ def load_data(condition='generic'):
     return originals, rewrites
 
 
-def compute_attribution_accuracy(originals, rewrites, features):
-    """Compute Delta-based attribution accuracy for each model."""
+def compute_matching_accuracy(originals, rewrites, features):
+    """Compute source-rewrite matching accuracy using character n-gram features.
+
+    Uses Manhattan distance on z-scored features (analogous to Delta but with
+    character n-grams, which are appropriate for short texts per Eder 2017).
+    """
     orig_X = originals[features].values
     orig_X = np.nan_to_num(orig_X, nan=0.0)
 
@@ -222,10 +230,10 @@ def create_combined_figure():
     ax2.spines['right'].set_visible(False)
 
     # ═══════════════════════════════════════════════════════════════
-    # Panel C: Attribution Accuracy
+    # Panel C: Stylometric Fingerprint Retention
     # ═══════════════════════════════════════════════════════════════
-    # Compute attribution accuracy
-    accuracy = compute_attribution_accuracy(originals, rewrites, valid_features)
+    # Compute source-rewrite matching accuracy
+    accuracy = compute_matching_accuracy(originals, rewrites, valid_features)
 
     model_names = ['GPT-5.4', 'Claude', 'Gemini']
     model_keys = ['gpt54', 'claude_sonnet', 'gemini_31_pro']
@@ -249,8 +257,8 @@ def create_combined_figure():
 
     ax3.set_xticks(x_pos)
     ax3.set_xticklabels(model_names)
-    ax3.set_ylabel('Attribution Accuracy (%)', fontweight='bold')
-    ax3.set_title('(C) Authorship Attribution', fontweight='bold', loc='left')
+    ax3.set_ylabel('Matching Accuracy (%)', fontweight='bold')
+    ax3.set_title('(C) Stylometric Fingerprint Retention', fontweight='bold', loc='left')
     ax3.set_ylim(0, 22)
     ax3.legend(loc='upper right', framealpha=0.95)
     ax3.spines['top'].set_visible(False)
